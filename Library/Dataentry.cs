@@ -2,13 +2,12 @@
 {
     public class Dataentry
     {
-        public static Book[] Book(string path)
+        public static Book[] Book(List<string> correctline)
         {
-            string[] databook = File.ReadAllLines(path);
-            Book[] book = new Book[databook.Length - 1];
-            for (int i = 0; i < databook.Length - 1; i++)
+            Book[] book = new Book[correctline.Count - 1];
+            for (int i = 0; i < correctline.Count - 1; i++)
             {
-                string[] lineData = databook[i + 1].Split(';');
+                string[] lineData = correctline[i + 1].Split(';');
                 book[i] = new Book(
                     int.Parse(lineData[0]), //первый столбец в файле книг парсим в инт
                     lineData[1], // тип стринг
@@ -16,19 +15,17 @@
                     int.Parse(lineData[3]),
                     int.Parse(lineData[4]),
                     int.Parse(lineData[5]));
-
             }
             return book;
         }
 
 
-        public static Reader[] Reader(string path)
+        public static Reader[] Reader(List<string> correctline)
         {
-            string[] datareader = File.ReadAllLines(path);
-            Reader[] reader = new Reader[datareader.Length - 1];
-            for (int i = 0; i < datareader.Length - 1; i++)
+            Reader[] reader = new Reader[correctline.Count - 1];
+            for (int i = 0; i < correctline.Count - 1; i++)
             {
-                string[] lineData = datareader[i + 1].Split(';');
+                string[] lineData = correctline[i + 1].Split(';');
                 reader[i] = new Reader(
                     int.Parse(lineData[0]), //первый столбец в файле книг парсим в инт
                 lineData[1]);
@@ -37,14 +34,12 @@
         }
 
 
-        public static BookReader[] BookReaders(string path, Book[] book, Reader[] reader)
+        public static BookReader[] BookReaders(List<string> correctline, Book[] book, Reader[] reader)
         {
-            string[] databookreaders = File.ReadAllLines(path);
-
-            BookReader[] bookreader = new BookReader[databookreaders.Length - 1];
-            for (int i = 0; i < databookreaders.Length - 1; i++)
+            BookReader[] bookreader = new BookReader[correctline.Count - 1];
+            for (int i = 0; i < correctline.Count - 1; i++)
             {
-                string[] lineData = databookreaders[i + 1].Split(';');
+                string[] lineData = correctline[i + 1].Split(';');
 
                 bookreader[i] = new BookReader(FindBook(book, int.Parse(lineData[0])),
                     FindReader(reader, int.Parse(lineData[1])), DateTime.Parse(lineData[2]), DateTime.Parse(lineData[3]));

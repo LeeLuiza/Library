@@ -2,18 +2,7 @@
 {
     public class Sketch
     {
-        public static int Mistake(int error, BookReader[] bookreader)
-        {
-            DateTime date = new DateTime(2023, 4, 28);
-            if (error == 0)
-            {
-                Table(bookreader);
-            }
-            return 0;
-        }
-
-
-        static void Table(BookReader[] bookreader)
+        public static void Table(BookReader[] bookreader)
         {
             int maxAuthor = 0;
             for (int i = 0; i < bookreader.Length; i++)
@@ -60,48 +49,35 @@
 
             for (int i = 0; i < bookreader.Length; i++)
             {
-                int column = 1;
                 for (int l = 0; l < maxx; l++) Console.Write("-");
                 Console.WriteLine();
-                if (column == 1)
+                Console.Write("|");
+                Console.Write(" " + bookreader[i].Bookname.Author);
+                for (int v = 0; v <= (maxAuthor - bookreader[i].Bookname.Author.Length); v++) Console.Write(" ");
+                Console.Write("|");
+                    
+                Console.Write("|");
+                Console.Write(" " + bookreader[i].Bookname.Title);
+                for (int v = 0; v <= (maxTitle - bookreader[i].Bookname.Title.Length); v++) Console.Write(" ");
+                Console.Write("|");
+                    
+                Console.Write("|");
+                Console.Write(" " + bookreader[i].Readername.Name);
+                for (int v = 0; v <= (maxReader - bookreader[i].Readername.Name.Length); v++) Console.Write(" ");
+                Console.Write("|");
+                    
+                if (bookreader[i].Returndate > DateTime.Now)
                 {
+                    Console.Write("|"); //DateOnly.FromDateTime(DateTime.Now);
+                    Console.Write(" " + DateOnly.FromDateTime(bookreader[i].Takedate));
+                    Console.Write(" ");
                     Console.Write("|");
-                    Console.Write(" " + bookreader[i].Bookname.Author);
-                    for (int v = 0; v <= (maxAuthor - bookreader[i].Bookname.Author.Length); v++) Console.Write(" ");
-                    Console.Write("|");
-                    column++;
                 }
-                if (column == 2)
+                else
                 {
+                    Console.Write("| ");
+                    for (int v = 0; v <= maxdata; v++) Console.Write(" ");
                     Console.Write("|");
-                    Console.Write(" " + bookreader[i].Bookname.Title);
-                    for (int v = 0; v <= (maxTitle - bookreader[i].Bookname.Title.Length); v++) Console.Write(" ");
-                    Console.Write("|");
-                    column++;
-                }
-                if (column == 3)
-                {
-                    Console.Write("|");
-                    Console.Write(" " + bookreader[i].Readername.Name);
-                    for (int v = 0; v <= (maxReader - bookreader[i].Readername.Name.Length); v++) Console.Write(" ");
-                    Console.Write("|");
-                    column++;
-                }
-                if (column == 4)
-                {
-                    if (bookreader[i].Returndate > DateTime.Now)
-                    {
-                        Console.Write("|"); //DateOnly.FromDateTime(DateTime.Now);
-                        Console.Write(" " + DateOnly.FromDateTime(bookreader[i].Takedate));
-                        Console.Write(" ");
-                        Console.Write("|");
-                    }
-                    else
-                    {
-                        Console.Write("| ");
-                        for (int v = 0; v <= maxdata; v++) Console.Write(" ");
-                        Console.Write("|");
-                    }
                 }
                 Console.WriteLine();
             }
